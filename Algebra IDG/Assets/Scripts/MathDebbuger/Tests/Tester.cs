@@ -28,12 +28,12 @@ public class Tester : MonoBehaviour
         vectors.Add(new Vec3(20.0f, 10.0f, 5.0f));
         vectors.Add(new Vec3(20.0f, 10.0f, 0.0f));
         vectors.Add(new Vec3(8.9f, 4.5f, 0.0f));
-        
+        /*
         Vec3 resta = vectors[0] - vectors[1];
-        
+
         Vec3 multiplicacion = 2 * vectors[1];
         Vec3 division = vectors[1] / 2;
-        
+
         Debug.Log(vectors[0]);
         Debug.Log(vectors[1]);
         Debug.Log(resta);
@@ -49,12 +49,41 @@ public class Tester : MonoBehaviour
         Debug.Log((vectors[5].normalized));
         Vec3 vec = new Vec3(20.0f, 10.0f, 0.0f);
         Debug.Log(vec.normalized);
-        vec.Normalize();
-        Debug.Log(vec);
+        //vec.Normalize();
+
+
+        Debug.Log(Vec3.Normalize(ref vec) + "ESTE ES CON PARAMETRO");
         Vector3 vecto = new Vector3(20.0f, 10.0f, 0.0f);
-        Debug.Log(vecto.normalized);
+        Debug.Log(vecto.normalized + "Vector3 normalized");
+        //Vector3.Normalize(vecto);
         vecto.Normalize();
-        Debug.Log(vecto);
+        Debug.Log(vecto + "Vector3 Normalize");
+        Debug.Log(Vec3.Distance(vectors[0], vectors[1]));
+
+        Vector3 vect = new Vector3(20.0f, 10.0f, 0.0f);
+        Vector3 vectB = new Vector3(20.0f, 10.0f, 5.0f);
+        Debug.Log(Vector3.SqrMagnitude(vect));
+        Debug.Log(Vec3.SqrMagnitude(vectors[5]));
+        Debug.Log(Vector3.Scale(vect, vectB));
+        Debug.Log(Vec3.Scale(vectors[5], vectors[4]));
+        vect.Scale(vectB);
+        Debug.Log(vect);
+        vectors[5].Scale(vectors[4]);
+        Debug.Log(vectors[5]);
+        vectors[5].Normalize();
+        vectors[5].Set(100.0f, 100.0f, 100.0f);
+        Debug.Log(vectors[5] + "SETTED");
+*/
+        Vec3 test1 = new Vec3(10.0f, 10.0f, 10.0f);
+        Vec3 test2 = new Vec3(20.0f, 20.0f, 20.0f);
+        Vector3 test3 = new Vector3(10.0f, 10.0f, 10.0f);
+        Vector3 test4 = new Vector3(20.0f, 20.0f, 20.0f);
+
+        //test1.Scale(test2);
+        Debug.Log(Vec3.Scale(test1,test2));
+        //test3.Scale(test4);
+        Debug.Log(Vector3.Scale(test3,test4));
+
 
         #endregion
     }
