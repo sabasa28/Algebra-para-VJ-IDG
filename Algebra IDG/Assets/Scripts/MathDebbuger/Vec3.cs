@@ -10,8 +10,14 @@ namespace CustomMath
         public float z;
 
         public float sqrMagnitude { get { throw new NotImplementedException(); } }
-        public Vector3 normalized { get { throw new NotImplementedException(); } }
-        public float magnitude { get { throw new NotImplementedException(); } }
+        public Vec3 normalized { //CAMBIE ESTO DE Vector3 A Vec3, esta mal?
+            get
+            {
+                Vec3 aux= new Vec3(x,y,z);
+                return (aux/aux.magnitude);
+            }
+        }
+        public float magnitude { get { return (float)Math.Sqrt(x * x + y * y + z * z); } }
         #endregion
 
         #region Default Values
@@ -123,15 +129,15 @@ namespace CustomMath
         }
         public static float Angle(Vec3 from, Vec3 to)
         {
-            throw new NotImplementedException();
+            return Mathf.Rad2Deg * (float)Math.Acos(Dot(from, to)/(Math.Sqrt(Math.Pow(from.x,2)+Math.Pow(from.y,2)+ Math.Pow(from.z,2))*Math.Sqrt(Math.Pow(to.x,2)+ Math.Pow(to.y,2)+ Math.Pow(to.z,2))));
         }
         public static Vec3 ClampMagnitude(Vec3 vector, float maxLength)
         {
-            throw new NotImplementedException();
+            return vector.normalized*maxLength;
         }
         public static float Magnitude(Vec3 vector)
         {
-            throw new NotImplementedException();
+            return (float)Math.Sqrt(Math.Pow(vector.x, 2) + Math.Pow(vector.y, 2) + Math.Pow(vector.z, 2));
         }
         public static Vec3 Cross(Vec3 a, Vec3 b)
         {
@@ -143,7 +149,7 @@ namespace CustomMath
         }
         public static float Dot(Vec3 a, Vec3 b)
         {
-            throw new NotImplementedException();
+            return ((a.x*b.x)+(a.y*b.y)+(a.z*b.z));
         }
         public static Vec3 Lerp(Vec3 a, Vec3 b, float t)
         {
@@ -175,7 +181,9 @@ namespace CustomMath
         }
         public void Set(float newX, float newY, float newZ)
         {
-            throw new NotImplementedException();
+            x = newX;
+            y = newY;
+            z = newZ;
         }
         public void Scale(Vec3 scale)
         {
@@ -183,7 +191,15 @@ namespace CustomMath
         }
         public void Normalize()
         {
-            throw new NotImplementedException();
+            Vec3 newVec = new Vec3(x,y,z);
+            newVec /= newVec.magnitude;
+            Set(newVec.x, newVec.y, newVec.z);
+        }
+        public void Normalize(Vec3 vector)
+        {
+            Vec3 newVec = vector / vector.magnitude;
+            vector.Set(newVec.x,newVec.y,newVec.z);
+
         }
         #endregion
 
