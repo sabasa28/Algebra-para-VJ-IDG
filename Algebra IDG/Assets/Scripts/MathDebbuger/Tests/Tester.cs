@@ -5,6 +5,7 @@ using CustomMath;
 
 public class Tester : MonoBehaviour
 {
+
     void Start()
     {
         VectorDebugger.EnableCoordinates();
@@ -18,16 +19,25 @@ public class Tester : MonoBehaviour
         VectorDebugger.AddVector(Vector3.down * 7, Color.green, "elVerde");
         */
 
+
+
+
+
+
+        //Ejercicio 2
+
+
+
         #region Fuego
         VectorDebugger.EnableEditorView();
-        List<Vec3> vectors = new List<Vec3>();
-        vectors.Add(new Vec3(10.0f, 0.0f, 0.0f));
-        vectors.Add(new Vec3(10.0f, 10.0f, 0.0f));
-        vectors.Add(new Vec3(20.0f, 10.0f, 0.0f));
-        vectors.Add(new Vec3(20.0f, 20.0f, 0.0f));
-        vectors.Add(new Vec3(20.0f, 10.0f, 5.0f));
-        vectors.Add(new Vec3(20.0f, 10.0f, 0.0f));
-        vectors.Add(new Vec3(8.9f, 4.5f, 0.0f));
+        //List<Vec3> vectors = new List<Vec3>();
+        //vectors.Add(new Vec3(10.0f, 0.0f, 0.0f));
+        //vectors.Add(new Vec3(10.0f, 10.0f, 0.0f));
+        //vectors.Add(new Vec3(20.0f, 10.0f, 0.0f));
+        //vectors.Add(new Vec3(20.0f, 20.0f, 0.0f));
+        //vectors.Add(new Vec3(20.0f, 10.0f, 5.0f));
+        //vectors.Add(new Vec3(20.0f, 10.0f, 0.0f));
+        //vectors.Add(new Vec3(8.9f, 4.5f, 0.0f));
         /*
         Vec3 resta = vectors[0] - vectors[1];
 
@@ -74,16 +84,23 @@ public class Tester : MonoBehaviour
         vectors[5].Set(100.0f, 100.0f, 100.0f);
         Debug.Log(vectors[5] + "SETTED");
 */
-        Vec3 test1 = new Vec3(10.0f, 10.0f, 10.0f);
-        Vec3 test2 = new Vec3(20.0f, 20.0f, 20.0f);
-        Vector3 test3 = new Vector3(10.0f, 10.0f, 10.0f);
-        Vector3 test4 = new Vector3(20.0f, 20.0f, 20.0f);
+
+
+
+        Vec3 test1 = new Vec3(5.0f, 5.0f, 5.0f);
+        Vec3 test2 = new Vec3(25.0f, 20.0f, 20.0f);
+        Vector3 test3 = new Vector3(5.0f, 5.0f, 5.0f);
+        Vector3 test4 = new Vector3(25.0f, 20.0f, 20.0f);
+
+        
+
 
         //test1.Scale(test2);
-        Debug.Log(Vec3.Scale(test1,test2));
+        //Debug.Log(Vec3.Scale(test1,test2));
         //test3.Scale(test4);
-        Debug.Log(Vector3.Scale(test3,test4));
-
+        //Debug.Log(Vector3.Scale(test3,test4));
+        Debug.Log(Vec3.Lerp(test1,test2,10));
+        Debug.Log(Vector3.Lerp(test3,test4,10));
 
         #endregion
     }
@@ -91,6 +108,8 @@ public class Tester : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
         if (Input.GetKeyDown(KeyCode.O))
         {
             VectorDebugger.TurnOffVector("elAzul");

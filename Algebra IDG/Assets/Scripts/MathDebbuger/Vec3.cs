@@ -141,31 +141,33 @@ namespace CustomMath
         }
         public static Vec3 Cross(Vec3 a, Vec3 b)
         {
-            throw new NotImplementedException();
+            return new Vec3(((a.y * b.z)-(a.z * b.y)),((a.z*b.x)-(a.x*b.z)),((a.x*b.y)-(a.y*b.x)));
         }
         public static float Distance(Vec3 a, Vec3 b)
         {
             a -= b;
 
-            return Math.Abs(a.x+a.y+a.z);
+            return Math.Abs(a.x+a.y+a.z); // habria que hacerle valor absoluto, no?
         }
         public static float Dot(Vec3 a, Vec3 b)
         {
             return ((a.x*b.x)+(a.y*b.y)+(a.z*b.z));
         }
-        public static Vec3 Lerp(Vec3 a, Vec3 b, float t)
+        public static Vec3 Lerp(Vec3 a, Vec3 b, float t)  //FALTA MMAS 10
         {
-            return (a * t);//FALTA HACER
+            float aux = Mathf.Clamp(t,0,1);
+
+            return new Vec3((b-a)*(aux));
         }
-        public static Vec3 LerpUnclamped(Vec3 a, Vec3 b, float t)
+        public static Vec3 LerpUnclamped(Vec3 a, Vec3 b, float t)  //FALTA MAS 10
+        {
+            return new Vec3((b - a) * t);
+        }
+        public static Vec3 Max(Vec3 a, Vec3 b)  //FALTA
         {
             throw new NotImplementedException();
         }
-        public static Vec3 Max(Vec3 a, Vec3 b)
-        {
-            throw new NotImplementedException();
-        }
-        public static Vec3 Min(Vec3 a, Vec3 b)
+        public static Vec3 Min(Vec3 a, Vec3 b)  //FALTA
         {
             throw new NotImplementedException();
         }
@@ -173,13 +175,15 @@ namespace CustomMath
         {
             return vector.sqrMagnitude;
         }
-        public static Vec3 Project(Vec3 vector, Vec3 onNormal) 
+        public static Vec3 Project(Vec3 vector, Vec3 onNormal) //FALTA
         {
-            throw new NotImplementedException();
+            return (Dot(vector,onNormal)/Dot(vector,vector)*vector);
         }
-        public static Vec3 Reflect(Vec3 inDirection, Vec3 inNormal) 
+        public static Vec3 Reflect(Vec3 inDirection, Vec3 inNormal)  //FALTA 
         {
             throw new NotImplementedException();
+
+            //return Angle(inDirection, inNormal);//
         }
         public void Set(float newX, float newY, float newZ)
         {
