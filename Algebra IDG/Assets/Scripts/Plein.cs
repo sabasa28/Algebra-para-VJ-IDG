@@ -4,6 +4,7 @@ using UnityEngine;
 using CustomMath;
 using System;
 using System.Drawing;
+using UnityEditor;
 
 namespace CustomMath
 {
@@ -13,7 +14,6 @@ namespace CustomMath
     [System.Serializable]
     public struct Plein 
     {
-        
         //
         // Resumen:
         //     Creates a plane.
@@ -24,8 +24,8 @@ namespace CustomMath
         //   inPoint:
         public Plein(Vec3 inNormal, Vec3 inPoint)
         {
-            normal = inNormal;
-            distance = inPoint.x; //WHAT QUE QUISE HACER ACA WTTTTTTTTTTTTTTTTTTF
+            normal = inNormal.normalized;
+            distance = - Vec3.Dot(normal, inPoint);
         }
 
         //
@@ -45,7 +45,7 @@ namespace CustomMath
 
             normal = Vec3.Cross(side1, side2).normalized;
 
-            distance = (Vec3.Distance(a,Vec3.Zero)+ Vec3.Distance(b, Vec3.Zero)+ Vec3.Distance(c, Vec3.Zero))/3;
+            distance = -Vec3.Dot(normal, a);
         }
 
         //
@@ -62,11 +62,9 @@ namespace CustomMath
         // Resumen:
         //     Returns a copy of the plane that faces in the opposite direction.
         public Plein flipped 
-        { 
+        {
             get {
-                normal = -normal;
-
-                return new Plein(normal, new Vec3(distance, 0, 0));
+                return new Plein(-normal, -normal*distance);
             } 
         }
 
@@ -85,7 +83,9 @@ namespace CustomMath
         //     The translated plane.
         public static Plein Translate(Plein plein, Vec3 translation)
         {
-            throw new NotImplementedException();
+            Vec3 aux = - (plein.normal * plein.distance + translation);
+            return new Plein(plein.normal, aux);
+
         }
         //
         // Resumen:
@@ -99,15 +99,15 @@ namespace CustomMath
         //     A point on the plane that is closest to point.
         public Vec3 ClosestPointOnPlane(Vec3 point)
         {
-            
-            throw new NotImplementedException();
+            return (point - normal * GetDistanceToPoint(point));
         }
         //
         // Resumen:
         //     Makes the plane face in the opposite direction.
         public void Flip()
         {
-            throw new NotImplementedException();
+            normal = -normal;
+            distance = -distance;
         }
         //
         // Resumen:
@@ -117,7 +117,7 @@ namespace CustomMath
         //   point:
         public float GetDistanceToPoint(Vec3 point)
         {
-            throw new NotImplementedException();
+            return Vec3.Dot(normal, point) + distance;
         }
         //
         // Resumen:
@@ -127,7 +127,8 @@ namespace CustomMath
         //   point:
         public bool GetSide(Vec3 point)
         {
-            throw new NotImplementedException();
+            if ((Vec3.Dot(normal, point) + distance) > 0) return true;
+            else return false;
         }
         public bool Raycast(Ray ray, out float enter)
         {
@@ -141,9 +142,10 @@ namespace CustomMath
         //   inPt0:
         //
         //   inPt1:
-        public bool SameSide(Vector3 inPt0, Vector3 inPt1)
+        public bool SameSide(Vec3 inPt0, Vec3 inPt1)
         {
-            throw new NotImplementedException();
+            if (GetSide(inPt0) == GetSide(inPt1)) return true;
+            else return false;
         }
         //
         // Resumen:
@@ -161,7 +163,12 @@ namespace CustomMath
         //     Third point in clockwise order.
         public void Set3Points(Vec3 a, Vec3 b, Vec3 c)
         {
-            throw new NotImplementedException();
+            Vec3 side1 = b - a;
+            Vec3 side2 = c - a;
+
+            normal = Vec3.Cross(side1, side2).normalized;
+
+            distance = -Vec3.Dot(normal, a);
         }
         //
         // Resumen:
@@ -176,11 +183,12 @@ namespace CustomMath
         //     A point that lies on the plane.
         public void SetNormalAndPosition(Vec3 inNormal, Vec3 inPoint)
         {
-            throw new NotImplementedException();
+            normal = inNormal.normalized;
+            distance = -Vec3.Dot(inNormal, inPoint);
         }
         public override string ToString()
         {
-            return "(normal:"+normal.ToString()+", distance:"+distance+")";
+            return "(normal:("+normal.x+", "+normal.y+", "+normal.z+"), distance:"+distance+")";
         }
         public string ToString(string format)
         {
@@ -195,7 +203,7 @@ namespace CustomMath
         //     The offset in space to move the plane with.
         public void Translate(Vector3 translation)
         {
-            throw new NotImplementedException();
+            distance+= translation.magnitude;
         }
     }
 }

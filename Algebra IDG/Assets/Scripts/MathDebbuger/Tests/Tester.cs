@@ -5,7 +5,6 @@ using CustomMath;
 
 public class Tester : MonoBehaviour
 {
-    public Plane a;
     void Start()
     {
         VectorDebugger.EnableCoordinates();
@@ -20,26 +19,83 @@ public class Tester : MonoBehaviour
         */
 
 
-
-
-        //Ejercicio 2
-
-
-
         #region Fuego
         VectorDebugger.EnableEditorView();
 
+        Plein b = new Plein(new Vec3(2, 10, 10), new Vec3(20, 0, 10), new Vec3 (3,2,1));
+        Plane c = new Plane(new Vector3(2, 10, 10), new Vector3(20, 0, 10), new Vec3(3, 2, 1));
 
-        a = new Plane(new Vec3(2, 10, 10), new Vec3(20, 0, 10));
-        Plane c = new Plane(new Vec3(2, 10, 10), new Vec3(20, 0, 10), new Vec3(5, 1, 2));
-        
-        Plein b = new Plein(new Vec3(2, 10, 10), new Vec3(20, 0, 10), new Vec3(5, 1, 2));
-        
-        
+        Debug.Log(b);
         Debug.Log(c);
-        Debug.Log(b.ToString());
+
+        b.Set3Points(new Vec3(2, 10, 10), new Vec3(20, 0, 10), new Vec3(3, 2, 1));
+        c.Set3Points(new Vec3(2, 10, 10), new Vec3(20, 0, 10), new Vec3(3, 2, 1));
+
+        Debug.Log(b.ClosestPointOnPlane(new Vec3(-50, 100, 100)));
+        Debug.Log(c.ClosestPointOnPlane(new Vec3(-50, 100, 100)));
 
 
+        //Debug.Log(b.GetDistanceToPoint(new Vec3(1, 1, 1)));
+        //Debug.Log(c.GetDistanceToPoint(new Vec3(1, 1, 1)));
+        //
+        //Debug.Log(b.SameSide(new Vec3(-40, 11, 11),new Vec3 (-40,-10,11)));
+        //Debug.Log(c.SameSide(new Vec3(-40, 11, 11), new Vec3 (-40,-10,11)));
+        //
+        //b.SetNormalAndPosition(new Vec3(2, 10, 10), new Vec3(20, 0, 10));
+        //c.SetNormalAndPosition(new Vector3(2, 10, 10), new Vector3(20, 0, 10));
+        //
+        //Debug.Log("Plano =" + b.ToString());
+        //Debug.Log("Plano unity =" + c.ToString());
+
+        //Plein d = new Plein(new Vec3(4, 5, 1), new Vec3(10, 0, 12));
+        //
+        //Plane e = new Plane(new Vec3(4, 5, 1), new Vec3(10, 0, 12));
+        //
+        //Debug.Log("Plano =" + b.ToString());
+        //Debug.Log("Plano =" + c);
+        //
+        //
+        //Debug.Log("Flipped =" + b.flipped.ToString());
+        //Debug.Log("Flipped =" + c.flipped);
+        //
+        //b.Flip();
+        //c.Flip();
+        //
+        //Debug.Log("Plano flipped =" + b.ToString());
+        //Debug.Log("Plano flipped =" + c);
+        //
+        //
+        //Debug.Log("Translate =" + Plein.Translate(b, new Vec3(-10, 12, 1)).ToString());
+        //Debug.Log("Translate =" + Plane.Translate(c, new Vector3(-10, 12, 1)));
+
+
+        //Debug.Log(d.ToString());
+        //Debug.Log(e);
+
+
+        /*test ik
+        Vector3 planeA;
+        Vector3 planeB;
+        Vector3 planeC;
+
+        planeA = new Vector3(10, 20, 5);
+        planeB = new Vector3(10, 0, 50);
+        planeC = new Vector3(1, 20, 3);
+        Vec3 planesA = new Vec3(planeA);
+        Vec3 planesB = new Vec3(planeB);
+        Vec3 planesC = new Vec3(planeC);
+
+
+        Plane plane = new Plane(planeA, planeB, planeC);
+        Plein planes = new Plein(planesA, planesB, planesC);
+
+        Vec3 prueba = new Vec3(10, 3, 12);
+
+        Debug.Log(plane.ToString());
+        Debug.Log(planes.ToString());
+        Debug.Log(plane.GetDistanceToPoint(prueba));
+        Debug.Log(planes.GetDistanceToPoint(prueba));
+        */
 
         //
         //Debug.Log(Vector3.Distance(c.ClosestPointOnPlane(Vec3.Zero),Vector3.zero));
@@ -130,7 +186,6 @@ public class Tester : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
 
         if (Input.GetKeyDown(KeyCode.O))
         {
