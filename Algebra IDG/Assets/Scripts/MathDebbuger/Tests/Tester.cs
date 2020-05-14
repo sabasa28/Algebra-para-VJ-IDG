@@ -30,14 +30,17 @@ public class Tester : MonoBehaviour
         VectorDebugger.EnableEditorView();
 
 
-        //a = new Plane(new Vec3(2, 10, 10), new Vec3(20, 0, 10));
-        //Plane c = new Plane(new Vec3(2, 10, 10), new Vec3(20, 0, 10), new Vec3(5, 1, 2));
-        //
-        //
-        //Plein b = new Plein(new Vec3(2, 10, 10), new Vec3(20, 0, 10), new Vec3(5, 1, 2));
-        //
-        //Debug.Log(c);
-        //Debug.Log(b);
+        a = new Plane(new Vec3(2, 10, 10), new Vec3(20, 0, 10));
+        Plane c = new Plane(new Vec3(2, 10, 10), new Vec3(20, 0, 10), new Vec3(5, 1, 2));
+        
+        Plein b = new Plein(new Vec3(2, 10, 10), new Vec3(20, 0, 10), new Vec3(5, 1, 2));
+        
+        
+        Debug.Log(c);
+        Debug.Log(b.ToString());
+
+
+
         //
         //Debug.Log(Vector3.Distance(c.ClosestPointOnPlane(Vec3.Zero),Vector3.zero));
 
@@ -101,15 +104,15 @@ public class Tester : MonoBehaviour
 */
 
 
-        Vec3 test1 = new Vec3(35.0f, 4.0f, 5.0f);
-        Vec3 test2 = new Vec3(25.0f, 20.0f, 20.0f);
-        Vector3 test3 = new Vector3(35.0f, 4.0f, 5.0f);
-        Vector3 test4 = new Vector3(25.0f, 20.0f, 20.0f);
-
-
-        Debug.Log(Vec3.Reflect(test1,test2));
-
-        Debug.Log(Vector3.Reflect(test3,test4));
+        //Vec3 test1 = new Vec3(35.0f, 4.0f, 5.0f);
+        //Vec3 test2 = new Vec3(25.0f, 20.0f, 20.0f);
+        //Vector3 test3 = new Vector3(35.0f, 4.0f, 5.0f);
+        //Vector3 test4 = new Vector3(25.0f, 20.0f, 20.0f);
+        //
+        //
+        //Debug.Log(Vec3.Reflect(test1,test2));
+        //
+        //Debug.Log(Vector3.Reflect(test3,test4));
 
 
 

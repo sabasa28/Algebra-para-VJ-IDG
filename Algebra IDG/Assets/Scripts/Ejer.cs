@@ -15,6 +15,8 @@ public class Ejer : MonoBehaviour
     public Vector3 Rojo;
     Vec3 White;
     Vec3 Black;
+    Vec3 Red;
+    float t = 0.0f;
     void Start()
     {
         VectorDebugger.EnableCoordinates();
@@ -24,22 +26,6 @@ public class Ejer : MonoBehaviour
 
         White = new Vec3(Blanco);
         Black = new Vec3 (Negro);
-
-        /*
-        //Ejercicio 1
-        Rojo = Blanco + Negro;
-        */
-
-        
-        //Ejercicio 2 
-        //Rojo = Negro - Blanco;
-        
-        /*
-        //Ejercicio3
-        Rojo = Vector3.Scale(Blanco, Negro);
-        */
-        //Ejercicio4
-        //Rojo = Blanco + Negro;
 
         VectorDebugger.AddVector(Blanco, Color.white, "Blanco");
         VectorDebugger.AddVector(Negro, Color.black, "Negro");
@@ -53,28 +39,58 @@ public class Ejer : MonoBehaviour
     {
         White = new Vec3(Blanco);
         Black = new Vec3(Negro);
-        /*
+
+
         //Ejercicio 1
-        Rojo = Blanco + Negro;
-        */
+
+        //Red = White + Black;
 
         //Ejercicio 2
-        //Rojo = Negro - Blanco;
 
-        /*
+        //Red = Black - White;
+
         //Ejercicio 3
-        Rojo = Vector3.Scale(Blanco, Negro);
-        */
+
+        //Red = Vector3.Scale(White, Black);
+
         //Ejercicio 4
-        //Rojo = Blanco + Negro; //ACA HACER PRODUCTO PUNTO
+
+        //Red = Vec3.Cross(Black, White);
+
+        //Ejercicio 5
+
+        //Red = Vec3.Lerp(White,Black,t);
+        //t += Time.deltaTime;
+        //if (t >= 1) t = 0;
+
+        //Ejercicio 6
+
+        //Red = Vec3.Max(White, Black);
 
         //Ejercicio 7
 
-        Rojo = Vec3.Project(Black,White);
-        
+        //Red = Vec3.Project(White,Black);
 
-        VectorDebugger.UpdatePosition("Blanco" ,Blanco);
-        VectorDebugger.UpdatePosition("Negro", Negro);
+        //Ejercicio 8
+
+        //Red = Vec3.Zero;
+
+        //Ejercicio 9
+
+        //Red = Vec3.Reflect(White,Black);
+
+        //Ejercicio 10
+        //Red = Vec3.LerpUnclamped(Black, White,t);
+        //t += Time.deltaTime;
+        //if (t >= 10) t = 0;
+
+
+        Blanco = new Vec3(White);
+        Negro = new Vec3(Black);
+        Rojo = new Vec3(Red);
+
+        VectorDebugger.UpdatePosition("Blanco" ,White);
+        VectorDebugger.UpdatePosition("Negro", Black);
         VectorDebugger.UpdatePosition("Rojo", Rojo);
 
     }

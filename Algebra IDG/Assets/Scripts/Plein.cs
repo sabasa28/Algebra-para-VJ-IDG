@@ -42,15 +42,8 @@ namespace CustomMath
         {
             Vec3 side1 = b - a;
             Vec3 side2 = c - a;
-            Debug.Log(side1);
-            Debug.Log(side2);
-            
-            
-
 
             normal = Vec3.Cross(side1, side2).normalized;
-
-            Debug.Log(Vec3.Distance(side2,Vec3.Zero));
 
             distance = (Vec3.Distance(a,Vec3.Zero)+ Vec3.Distance(b, Vec3.Zero)+ Vec3.Distance(c, Vec3.Zero))/3;
         }
