@@ -5,7 +5,7 @@ using CustomMath;
 
 public class Tester : MonoBehaviour
 {
-
+    public Plane a;
     void Start()
     {
         VectorDebugger.EnableCoordinates();
@@ -22,14 +22,29 @@ public class Tester : MonoBehaviour
 
 
 
-
-
         //Ejercicio 2
 
 
 
         #region Fuego
         VectorDebugger.EnableEditorView();
+
+
+        //a = new Plane(new Vec3(2, 10, 10), new Vec3(20, 0, 10));
+        //Plane c = new Plane(new Vec3(2, 10, 10), new Vec3(20, 0, 10), new Vec3(5, 1, 2));
+        //
+        //
+        //Plein b = new Plein(new Vec3(2, 10, 10), new Vec3(20, 0, 10), new Vec3(5, 1, 2));
+        //
+        //Debug.Log(c);
+        //Debug.Log(b);
+        //
+        //Debug.Log(Vector3.Distance(c.ClosestPointOnPlane(Vec3.Zero),Vector3.zero));
+
+
+
+
+
         //List<Vec3> vectors = new List<Vec3>();
         //vectors.Add(new Vec3(10.0f, 0.0f, 0.0f));
         //vectors.Add(new Vec3(10.0f, 10.0f, 0.0f));
@@ -86,22 +101,26 @@ public class Tester : MonoBehaviour
 */
 
 
-
-        Vec3 test1 = new Vec3(5.0f, 5.0f, 5.0f);
+        Vec3 test1 = new Vec3(35.0f, 4.0f, 5.0f);
         Vec3 test2 = new Vec3(25.0f, 20.0f, 20.0f);
-        Vector3 test3 = new Vector3(5.0f, 5.0f, 5.0f);
+        Vector3 test3 = new Vector3(35.0f, 4.0f, 5.0f);
         Vector3 test4 = new Vector3(25.0f, 20.0f, 20.0f);
 
-        
+
+        Debug.Log(Vec3.Reflect(test1,test2));
+
+        Debug.Log(Vector3.Reflect(test3,test4));
 
 
+
+        /*
         //test1.Scale(test2);
         //Debug.Log(Vec3.Scale(test1,test2));
         //test3.Scale(test4);
         //Debug.Log(Vector3.Scale(test3,test4));
         Debug.Log(Vec3.Lerp(test1,test2,10));
         Debug.Log(Vector3.Lerp(test3,test4,10));
-
+        */
         #endregion
     }
 

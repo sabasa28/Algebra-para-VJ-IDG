@@ -10,7 +10,7 @@ namespace CustomMath
         public float z;
 
         public float sqrMagnitude { get { return (x * x + y * y + z * z); } }
-        public Vec3 normalized { //CAMBIE ESTO DE Vector3 A Vec3
+        public Vec3 normalized {
             get
             {
                 Vec3 aux= new Vec3(x,y,z);
@@ -133,7 +133,10 @@ namespace CustomMath
         }
         public static Vec3 ClampMagnitude(Vec3 vector, float maxLength)
         {
-            return vector.normalized*maxLength;
+            if (Magnitude(vector) > maxLength)
+                return vector.normalized * maxLength;
+            else
+                return vector;
         }
         public static float Magnitude(Vec3 vector)
         {
@@ -147,43 +150,55 @@ namespace CustomMath
         {
             a -= b;
 
-            return Math.Abs(a.x+a.y+a.z); // habria que hacerle valor absoluto, no?
+            return Magnitude(a);
         }
         public static float Dot(Vec3 a, Vec3 b)
         {
             return ((a.x*b.x)+(a.y*b.y)+(a.z*b.z));
         }
-        public static Vec3 Lerp(Vec3 a, Vec3 b, float t)  //FALTA MMAS 10
+        public static Vec3 Lerp(Vec3 a, Vec3 b, float t)
         {
             float aux = Mathf.Clamp(t,0,1);
 
-            return new Vec3((b-a)*(aux));
+            return a + new Vec3((b-a)* aux);
         }
-        public static Vec3 LerpUnclamped(Vec3 a, Vec3 b, float t)  //FALTA MAS 10
+        public static Vec3 LerpUnclamped(Vec3 a, Vec3 b, float t)
         {
-            return new Vec3((b - a) * t);
+            return a + new Vec3((b - a) * t);
         }
-        public static Vec3 Max(Vec3 a, Vec3 b)  //FALTA
+        public static Vec3 Max(Vec3 a, Vec3 b) 
         {
-            throw new NotImplementedException();
+            float newX = a.x;
+            float newY = a.y;
+            float newZ = a.z;
+            if (newX < b.x) newX = b.x;
+            if (newY < b.y) newY = b.y;
+            if (newZ < b.z) newZ = b.z;
+
+            return new Vec3(newX,newY,newZ);
         }
-        public static Vec3 Min(Vec3 a, Vec3 b)  //FALTA
+        public static Vec3 Min(Vec3 a, Vec3 b)
         {
-            throw new NotImplementedException();
+            float newX = a.x;
+            float newY = a.y;
+            float newZ = a.z;
+            if (newX > b.x) newX = b.x;
+            if (newY > b.y) newY = b.y;
+            if (newZ > b.z) newZ = b.z;
+
+            return new Vec3(newX, newY, newZ);
         }
         public static float SqrMagnitude(Vec3 vector)
         {
             return vector.sqrMagnitude;
         }
-        public static Vec3 Project(Vec3 vector, Vec3 onNormal) //FALTA
+        public static Vec3 Project(Vec3 vector, Vec3 onNormal)
         {
-            return (Dot(vector,onNormal)/Dot(vector,vector)*vector);
+            return (Dot(onNormal, vector) / Dot(onNormal, onNormal)) * onNormal; 
         }
-        public static Vec3 Reflect(Vec3 inDirection, Vec3 inNormal)  //FALTA 
+        public static Vec3 Reflect(Vec3 inDirection, Vec3 inNormal) 
         {
-            throw new NotImplementedException();
-
-            //return Angle(inDirection, inNormal);//
+            return inDirection - 2 * (Dot(inDirection, inNormal)) * inNormal;
         }
         public void Set(float newX, float newY, float newZ)
         {

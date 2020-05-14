@@ -8,17 +8,27 @@ public class Nave : MonoBehaviour
 {
     float rotY = 0;
     public float rotSpeed;
+    public float shotForce;
     public GameObject bullet;
     public Vec3 bulletForce;
-    // Start is called before the first frame update
+    public Vector3 White;
+    public Vec3 Blanco;
+
     void Start()
     {
+        VectorDebugger.EnableCoordinates();
+        Blanco = new Vec3(transform.forward*50);
+        White = Blanco;
+        VectorDebugger.AddVector(transform.position,Blanco, Color.white, "Blanco");
+        VectorDebugger.EnableEditorView();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //bulletForce 
+        Blanco = new Vec3(transform.forward*50);
+
+        VectorDebugger.UpdatePosition("Blanco", transform.position, Blanco);
+
         transform.rotation = Quaternion.Euler(new Vec3 (transform.rotation.x, rotY, transform.rotation.z));
         if(Input.GetKey(KeyCode.RightArrow))
         {
@@ -30,9 +40,9 @@ public class Nave : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Instantiate(bullet);
-            bullet.transform.rotation = transform.rotation;
-            bullet.GetComponent<Rigidbody>().AddForce(transform.forward);//no
+            GameObject b= Instantiate(bullet);
+            b.transform.rotation = transform.rotation;
+            b.GetComponent<Rigidbody>().AddForce(b.transform.forward * shotForce);//no
         }
 
     }
