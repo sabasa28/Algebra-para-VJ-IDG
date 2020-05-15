@@ -85,7 +85,6 @@ namespace CustomMath
         {
             Vec3 aux = - (plein.normal * plein.distance + translation);
             return new Plein(plein.normal, aux);
-
         }
         //
         // Resumen:
@@ -201,9 +200,10 @@ namespace CustomMath
         // Parámetros:
         //   translation:
         //     The offset in space to move the plane with.
-        public void Translate(Vector3 translation)
+        public void Translate(Vec3 translation)
         {
-            distance+= translation.magnitude;
+            Vec3 aux = (normal * distance + translation);
+            distance = Vec3.Dot(normal, aux);
         }
     }
 }

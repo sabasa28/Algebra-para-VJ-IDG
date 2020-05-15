@@ -17,6 +17,21 @@ public class Ejer : MonoBehaviour
     Vec3 Black;
     Vec3 Red;
     float t = 0.0f;
+
+    public enum Ejercicios
+    { 
+        uno,
+        dos,
+        tes,
+        cuatro,
+        cinco,
+        seis,
+        siete,
+        ocho,
+        nueve,
+        diez
+    }
+    public Ejercicios ejercicios = Ejercicios.uno;
     void Start()
     {
         VectorDebugger.EnableCoordinates();
@@ -31,6 +46,7 @@ public class Ejer : MonoBehaviour
         VectorDebugger.AddVector(Negro, Color.black, "Negro");
         VectorDebugger.AddVector(Rojo, Color.red, "Rojo");
 
+
         VectorDebugger.EnableEditorView();
     }
 
@@ -39,6 +55,45 @@ public class Ejer : MonoBehaviour
     {
         White = new Vec3(Blanco);
         Black = new Vec3(Negro);
+
+        switch (ejercicios)
+        {
+            case Ejercicios.uno:
+                Red = White + Black;
+                break;
+            case Ejercicios.dos:
+                Red = Black - White;
+                break;
+            case Ejercicios.tes:
+                Red = Vec3.Scale(White, Black);
+                break;
+            case Ejercicios.cuatro:
+                Red = Vec3.Cross(Black, White);
+                break;
+            case Ejercicios.cinco:
+                Red = Vec3.Lerp(White, Black, t);
+                t += Time.deltaTime;
+                if (t >= 1) t = 0;
+                break;
+            case Ejercicios.seis:
+                Red = Vec3.Max(White, Black);
+                break;
+            case Ejercicios.siete:
+                Red = Vec3.Project(White, Black);
+                break;
+            case Ejercicios.ocho:
+                break;
+            case Ejercicios.nueve:
+                Red = Vec3.Reflect(White, Black);
+                break;
+            case Ejercicios.diez:
+                Red = Vec3.LerpUnclamped(Black, White, t);
+                t += Time.deltaTime;
+                if (t >= 10) t = 0;
+                break;
+            default:
+                break;
+        }
 
 
         //Ejercicio 1

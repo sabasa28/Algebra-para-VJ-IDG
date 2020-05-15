@@ -18,21 +18,26 @@ public class Tester : MonoBehaviour
         VectorDebugger.AddVector(Vector3.down * 7, Color.green, "elVerde");
         */
 
-
         #region Fuego
         VectorDebugger.EnableEditorView();
 
-        Plein b = new Plein(new Vec3(2, 10, 10), new Vec3(20, 0, 10), new Vec3 (3,2,1));
-        Plane c = new Plane(new Vector3(2, 10, 10), new Vector3(20, 0, 10), new Vec3(3, 2, 1));
+        //Plein b = new Plein(new Vec3(2, 10, 10), new Vec3(20, 0, 10), new Vec3 (3,2,1));
+        //Plane c = new Plane(new Vector3(2, 10, 10), new Vector3(20, 0, 10), new Vec3(3, 2, 1));
+        //
+        //Debug.Log(b);
+        //Debug.Log(c);
+        //
+        //b.Translate(new Vec3(50, 1, 1));
+        //c.Translate(new Vec3(50, 1, 1));
+        //
+        //Debug.Log(b);
+        //Debug.Log(c);
 
-        Debug.Log(b);
-        Debug.Log(c);
-
-        b.Set3Points(new Vec3(2, 10, 10), new Vec3(20, 0, 10), new Vec3(3, 2, 1));
-        c.Set3Points(new Vec3(2, 10, 10), new Vec3(20, 0, 10), new Vec3(3, 2, 1));
-
-        Debug.Log(b.ClosestPointOnPlane(new Vec3(-50, 100, 100)));
-        Debug.Log(c.ClosestPointOnPlane(new Vec3(-50, 100, 100)));
+        //b.Set3Points(new Vec3(2, 10, 10), new Vec3(20, 0, 10), new Vec3(3, 2, 1));
+        //c.Set3Points(new Vec3(2, 10, 10), new Vec3(20, 0, 10), new Vec3(3, 2, 1));
+        //
+        //Debug.Log(b.ClosestPointOnPlane(new Vec3(-50, 100, 100)));
+        //Debug.Log(c.ClosestPointOnPlane(new Vec3(-50, 100, 100)));
 
 
         //Debug.Log(b.GetDistanceToPoint(new Vec3(1, 1, 1)));
