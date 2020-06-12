@@ -45,7 +45,7 @@ namespace CustomMath
 
             normal = Vec3.Cross(side1, side2).normalized;
 
-            distance = -Vec3.Dot(normal, a);
+            distance = - Vec3.Dot(normal, a);
         }
 
         //

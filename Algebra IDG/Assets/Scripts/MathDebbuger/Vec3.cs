@@ -194,7 +194,7 @@ namespace CustomMath
         }
         public static Vec3 Project(Vec3 vector, Vec3 onNormal)
         {
-            return (Dot(onNormal, vector) / Dot(onNormal, onNormal)) * onNormal; 
+            return (Dot(onNormal, vector) / Dot(onNormal, onNormal)) * onNormal;
         }
         public static Vec3 Reflect(Vec3 inDirection, Vec3 inNormal) 
         {

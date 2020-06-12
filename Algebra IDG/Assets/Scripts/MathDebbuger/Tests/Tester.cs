@@ -21,6 +21,22 @@ public class Tester : MonoBehaviour
         #region Fuego
         VectorDebugger.EnableEditorView();
 
+        Quarentenion miQ = new Quarentenion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w);
+        Quarentenion miQ2 = new Quarentenion(-3, 0, -0.5f, -3);
+        Quaternion noMiQ = new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w);
+        Quaternion noMiQ2 = new Quaternion(-3, 0, -0.5f, -3);
+
+        Debug.Log("Quat1" + miQ);
+        Debug.Log("Quat2" + miQ2);
+
+        Debug.Log("multiplicacion" + noMiQ * noMiQ2);
+        //Debug.Log(noMiQ.eulerAngles);
+        //Debug.Log(noMiQ2.eulerAngles);
+        Debug.Log("Eulers multiplicados" + Quaternion.Euler(Vector3.Scale(noMiQ.eulerAngles, noMiQ2.eulerAngles)));
+
+
+
+
         //Plein b = new Plein(new Vec3(2, 10, 10), new Vec3(20, 0, 10), new Vec3 (3,2,1));
         //Plane c = new Plane(new Vector3(2, 10, 10), new Vector3(20, 0, 10), new Vec3(3, 2, 1));
         //
