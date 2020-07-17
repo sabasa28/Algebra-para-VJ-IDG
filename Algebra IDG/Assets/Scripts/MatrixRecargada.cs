@@ -115,7 +115,8 @@ namespace CustomMath
             mTrans.m03 = vector.x;
             mTrans.m13 = vector.y;
             mTrans.m23 = vector.z;
-            mTrans.m33 = 1;
+            mTrans.m33 = 1.0f;
+
             return mTrans;
         }
         public static MatrixRecargada TRS(Vec3 pos, Quarentenion q, Vec3 s)
@@ -181,12 +182,10 @@ namespace CustomMath
         }
         public static bool operator ==(MatrixRecargada lhs, MatrixRecargada rhs)
         {
-            if (lhs.m00 == rhs.m00 && lhs.m01 == rhs.m01 && lhs.m02 == rhs.m02 && lhs.m03 == rhs.m03 &&
+            return (lhs.m00 == rhs.m00 && lhs.m01 == rhs.m01 && lhs.m02 == rhs.m02 && lhs.m03 == rhs.m03 &&
                 lhs.m10 == rhs.m10 && lhs.m11 == rhs.m11 && lhs.m12 == rhs.m12 && lhs.m13 == rhs.m13 &&
                 lhs.m20 == rhs.m20 && lhs.m21 == rhs.m21 && lhs.m22 == rhs.m22 && lhs.m23 == rhs.m23 &&
-                lhs.m30 == rhs.m30 && lhs.m31 == rhs.m31 && lhs.m32 == rhs.m32 && lhs.m33 == rhs.m33)
-                return true;
-            else return false;
+                lhs.m30 == rhs.m30 && lhs.m31 == rhs.m31 && lhs.m32 == rhs.m32 && lhs.m33 == rhs.m33);
         }
         public static bool operator !=(MatrixRecargada lhs, MatrixRecargada rhs)
         {

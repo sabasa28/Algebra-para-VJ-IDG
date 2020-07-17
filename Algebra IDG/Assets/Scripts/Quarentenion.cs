@@ -387,34 +387,36 @@ namespace CustomMath
         //   t:
         public static Quarentenion SlerpUnclamped(Quarentenion a, Quarentenion b, float t)
         {
-            double num2;
-            double num3;
+            float num1;
+            float num2;
             Quarentenion quaternion;
-            double num = t;
-            double num4 = (((a.x * b.x) + (a.y * b.y)) + (a.z * b.z)) + (a.w * b.w);
-            bool flag = false;
-            if (num4 < 0f)
+            float dot = (((a.x * b.x) + (a.y * b.y)) + (a.z * b.z)) + (a.w * b.w);
+            bool neg = false;
+            if (dot < 0f)
             {
-                flag = true;
-                num4 = -num4;
+                neg = true;
+                dot = -dot;
             }
-            if (num4 >= 1.0f)
+            if (dot >= 1.0f)
             {
-                num3 = 1f - num;
-                if (flag) num2 = -num;
-                else num2 = num;
+                num1 = 1.0f - t;
+                if (neg) num2 = -t;
+                else num2 = t;
             }
             else
             {
-                double num5 = (double)Math.Acos((double)num4);
-                double num6 = (double)(1.0 / Math.Sin((double)num5));
-                num3 = ((double)Math.Sin((double)((1f - num) * num5))) * num6;
-                num2 = flag ? (((double)-Math.Sin((double)(num * num5))) * num6) : (((double)Math.Sin((double)(num * num5))) * num6);
+                float num3 = (float)Math.Acos(dot);
+                float num4 = (float)(1.0 / Math.Sin(num3));
+                num1 = ((float)Math.Sin(((1f - t) * num3))) * num4;
+                if (neg)
+                    num2 = (((float)-Math.Sin((t * num3))) * num4);
+                else
+                    num2 = (((float)Math.Sin((t * num3))) * num4);
             }
-            quaternion.x = (float)((num3 * a.x) + (num2 * b.x));
-            quaternion.y = (float)((num3 * a.y) + (num2 * b.y));
-            quaternion.z = (float)((num3 * a.z) + (num2 * b.z));
-            quaternion.w = (float)((num3 * a.w) + (num2 * b.w));
+            quaternion.x = ((num1 * a.x) + (num2 * b.x));
+            quaternion.y = ((num1 * a.y) + (num2 * b.y));
+            quaternion.z = ((num1 * a.z) + (num2 * b.z));
+            quaternion.w = ((num1 * a.w) + (num2 * b.w));
             return quaternion;
         }
         public void Normalize()
