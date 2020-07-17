@@ -2,9 +2,11 @@
 using UnityEngine;
 using MathDebbuger;
 using CustomMath;
+using System;
 
 public class Tester : MonoBehaviour
 {
+    public Quaternion rot;
     void Start()
     {
         VectorDebugger.EnableCoordinates();
@@ -22,18 +24,67 @@ public class Tester : MonoBehaviour
         VectorDebugger.EnableEditorView();
 
         Quarentenion miQ = new Quarentenion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w);
-        Quarentenion miQ2 = new Quarentenion(-3, 0, -0.5f, -3);
+        Quarentenion miQ2 = new Quarentenion(-0.2f, 0, -0.3f, -0.4f);
         Quaternion noMiQ = new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w);
-        Quaternion noMiQ2 = new Quaternion(-3, 0, -0.5f, -3);
+        Quaternion noMiQ2 = new Quaternion(-0.2f, 0, -0.3f, -0.4f);
+        Quarentenion myA = new Quarentenion(-0.2f, 0.3f, 0.1f, 0.5f);
+        Quarentenion myB = new Quarentenion(0.2f, 0.3f, 0.8f, 0.5f);
 
-        Debug.Log("Quat1" + miQ);
-        Debug.Log("Quat2" + miQ2);
+        Quaternion A = new Quaternion(-0.2f, 0.3f, 0.1f, 0.5f);
+        Quaternion B = new Quaternion(0.2f, 0.3f, 0.8f, 0.5f);
 
-        Debug.Log("multiplicacion" + noMiQ * noMiQ2);
+        MatrixRecargada m = MatrixRecargada.identity;
+        Matrix4x4 M = Matrix4x4.identity;
+
+        //m = MatrixRecargada.Translate(new Vec3(transform.position));
+        //M = Matrix4x4.Translate((transform.position));
+
+        //m = MatrixRecargada.Scale(new Vec3(transform.lossyScale));
+        //M = Matrix4x4.Scale((transform.lossyScale));
+        //
+        //m = MatrixRecargada.Rotate(new Quarentenion(transform.rotation));
+        //M = Matrix4x4.Rotate((transform.rotation));
+
+        Debug.Log(MatrixRecargada.TRS(new Vec3(transform.position),new Quarentenion(transform.rotation),new Vec3(transform.lossyScale)));
+        Debug.Log(M);
+
+
+        //m= MatrixRecargada.Scale(new Vec3(transform.lossyScale));
+        //M= Matrix4x4.Scale(transform.lossyScale);
+        //m *= MatrixRecargada.identity;
+        //M *= Matrix4x4.identity;
+
+
+        //Debug.Log(m == MatrixRecargada.identity);
+        //Debug.Log(m != MatrixRecargada.identity);
+        //Debug.Log(M == Matrix4x4.identity);
+        //Debug.Log(M != Matrix4x4.identity);
+
+        //Debug.Log(Quaternion.AngleAxis(30, Vector3.up));
+        //Debug.Log(Quarentenion.AngleAxis(30, Vec3.Up));
+
+        //Debug.Log("Quat1" + miQ);
+        //Debug.Log("Quat2" + miQ2);
+
+        //Debug.Log("angle miq" + Quarentenion.Angle(miQ, miQ2));
+
+        //Debug.Log(Quaternion.identity);
+        //Debug.Log("ANGLE MIO" + Quarentenion.Angle(miQ, miQ2));
+        //Debug.Log("ANGLE UNITY" + Quaternion.Angle(noMiQ, noMiQ2));
+        //Debug.Log("quaren"+Quarentenion.Euler(new Vec3(7, 12, 5)));
+        //Debug.Log("quater"+Quaternion.Euler(new Vector3(7, 12, 5)));
+        //Debug.Log(miQ.eulerAngles);
+        //Debug.Log(noMiQ.eulerAngles);
+        //miQ.Normalize();
+        //noMiQ.Normalize();
+        //Debug.Log(miQ);
+        //Debug.Log(noMiQ);
+
+
         //Debug.Log(noMiQ.eulerAngles);
         //Debug.Log(noMiQ2.eulerAngles);
-        Debug.Log("Eulers multiplicados" + Quaternion.Euler(Vector3.Scale(noMiQ.eulerAngles, noMiQ2.eulerAngles)));
-
+        //Debug.Log("angle nomiq" + Quaternion.Angle(noMiQ, noMiQ2));
+        //Debug.Log(noMiQ + " " + noMiQ2);
 
 
 
@@ -207,7 +258,7 @@ public class Tester : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        rot = transform.rotation;
         if (Input.GetKeyDown(KeyCode.O))
         {
             VectorDebugger.TurnOffVector("elAzul");
