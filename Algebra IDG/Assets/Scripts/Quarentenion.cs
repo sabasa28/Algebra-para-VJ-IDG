@@ -11,7 +11,7 @@ using System.Runtime.CompilerServices;
 
 namespace CustomMath
 {
-    public struct Quarentenion : IEquatable<Quarentenion>
+    public struct Quarentenion
     {
         public const float kEpsilon = 1E-06F;
         //
@@ -138,7 +138,12 @@ namespace CustomMath
             }
             set
             {
-                eulerAngles = value;
+                Quarentenion q= Euler(value);
+                x = q.x;
+                y = q.y;
+                z = q.z;
+                w = q.w;
+
             }
         }
         //
@@ -178,18 +183,16 @@ namespace CustomMath
         //   angle:
         //
         //   axis:
-        public static Quarentenion AngleAxis(float angle, Vector3 axis) ///revisar///
+        public static Quarentenion AngleAxis(float angle, Vector3 axis)
         {
-            angle *= Mathf.Deg2Rad;
-            angle /= 2.0f;
+            angle *= Mathf.Deg2Rad * 0.5f;
             axis.Normalize();
             Quarentenion newQ;
             newQ.x = axis.x * Mathf.Sin(angle);
             newQ.y = axis.y * Mathf.Sin(angle);
             newQ.z = axis.z * Mathf.Sin(angle);
             newQ.w = Mathf.Cos(angle);
-            newQ.Normalize();
-            return newQ;
+            return newQ.normalized;
         }
         //
         // Resumen:
@@ -215,19 +218,19 @@ namespace CustomMath
             Quarentenion qX = identity;
             Quarentenion qY = identity;
             Quarentenion qZ = identity;
-
+            
             float sin = Mathf.Sin(Mathf.Deg2Rad * euler.x * 0.5f);
             float cos = Mathf.Cos(Mathf.Deg2Rad * euler.x * 0.5f);
             qX.Set(sin, 0.0f, 0.0f, cos);
-
+            
             sin = Mathf.Sin(Mathf.Deg2Rad * euler.y * 0.5f);
             cos = Mathf.Cos(Mathf.Deg2Rad * euler.y * 0.5f);
             qY.Set(0.0f, sin, 0.0f, cos);
-
+            
             sin = Mathf.Sin(Mathf.Deg2Rad * euler.z * 0.5f);
             cos = Mathf.Cos(Mathf.Deg2Rad * euler.z * 0.5f);
             qZ.Set(0.0f, 0.0f, sin, cos);
-
+            
             return new Quarentenion(qX * qY * qZ);
         }
 
@@ -246,24 +249,6 @@ namespace CustomMath
         {
             return Euler(new Vec3(x, y, z));
         }
-        public static Quarentenion EulerAngles(float x, float y, float z)
-        {
-            throw new NotImplementedException();
-        }
-        public static Quarentenion EulerAngles(Vector3 euler)
-        {
-            throw new NotImplementedException();
-        }
-        public static Quarentenion EulerRotation(float x, float y, float z)
-        {
-            throw new NotImplementedException();
-        }
-        public static Quarentenion EulerRotation(Vec3 euler)
-        {
-            throw new NotImplementedException();
-        }
-
-
 
         //
         // Resumen:
@@ -273,7 +258,6 @@ namespace CustomMath
         //   fromDirection:
         //
         //   toDirection:
-
         public static Quarentenion FromToRotation(Vec3 fromDirection, Vec3 toDirection)
         {
             throw new NotImplementedException();
@@ -386,37 +370,10 @@ namespace CustomMath
         //   b:
         //
         //   t:
-        public static Quarentenion Slerp(Quarentenion a, Quarentenion b, float t) //revisar
+        public static Quarentenion Slerp(Quarentenion a, Quarentenion b, float t)
         {
-            float angle = Angle(a, b);
-            float angleLerped = angle * t;
-
-            if (angleLerped > angle) angleLerped = angle;
-
-            angleLerped *= Mathf.Deg2Rad;
-
-            float sin;
-            float cos;
-
-            Quarentenion rotX;
-            Quarentenion rotY;
-            Quarentenion rotZ;
-            Quarentenion q;
-
-            sin = Mathf.Sin(angleLerped * 0.5f);
-            cos = Mathf.Cos(angleLerped * 0.5f);
-            rotX = new Quarentenion(sin, 0f, 0f, cos);
-
-            sin = Mathf.Sin(angleLerped * 0.5f);
-            cos = Mathf.Cos(angleLerped * 0.5f);
-            rotY = new Quarentenion(0f, sin, 0f, cos);
-
-            sin = Mathf.Sin(angleLerped * 0.5f);
-            cos = Mathf.Cos(angleLerped * 0.5f);
-            rotZ = new Quarentenion(0f, 0f, sin, cos);
-
-            q = rotX * rotY * rotZ;
-            return q.normalized;
+            t = Mathf.Clamp(t, 0, 1);
+            return SlerpUnclamped(a, b, t);
         }
         //
         // Resumen:
@@ -430,19 +387,35 @@ namespace CustomMath
         //   t:
         public static Quarentenion SlerpUnclamped(Quarentenion a, Quarentenion b, float t)
         {
-            throw new NotImplementedException();
-        }
-        public bool Equals(Quarentenion other)
-        {
-            throw new NotImplementedException();
-        }
-        public override bool Equals(object other)
-        {
-            throw new NotImplementedException();
-        }
-        public override int GetHashCode()
-        {
-            throw new NotImplementedException();
+            double num2;
+            double num3;
+            Quarentenion quaternion;
+            double num = t;
+            double num4 = (((a.x * b.x) + (a.y * b.y)) + (a.z * b.z)) + (a.w * b.w);
+            bool flag = false;
+            if (num4 < 0f)
+            {
+                flag = true;
+                num4 = -num4;
+            }
+            if (num4 >= 1.0f)
+            {
+                num3 = 1f - num;
+                if (flag) num2 = -num;
+                else num2 = num;
+            }
+            else
+            {
+                double num5 = (double)Math.Acos((double)num4);
+                double num6 = (double)(1.0 / Math.Sin((double)num5));
+                num3 = ((double)Math.Sin((double)((1f - num) * num5))) * num6;
+                num2 = flag ? (((double)-Math.Sin((double)(num * num5))) * num6) : (((double)Math.Sin((double)(num * num5))) * num6);
+            }
+            quaternion.x = (float)((num3 * a.x) + (num2 * b.x));
+            quaternion.y = (float)((num3 * a.y) + (num2 * b.y));
+            quaternion.z = (float)((num3 * a.z) + (num2 * b.z));
+            quaternion.w = (float)((num3 * a.w) + (num2 * b.w));
+            return quaternion;
         }
         public void Normalize()
         {
@@ -515,16 +488,7 @@ namespace CustomMath
         {
             throw new NotImplementedException();
         }
-        //
-        // Resumen:
-        //     Returns a nicely formatted string of the Quaternion.
-        //
-        // Parámetros:
         //   format:
-        public string ToString(string format)
-        {
-            throw new NotImplementedException();
-        }
         //
         // Resumen:
         //     Returns a nicely formatted string of the Quaternion.
@@ -538,9 +502,9 @@ namespace CustomMath
 
         public static Vec3 operator *(Quarentenion rotation, Vec3 point)
         {
-            Quarentenion q = Euler(point);
-            q *= rotation;
-            return q.eulerAngles;
+            Quarentenion qPoint = Euler(point);
+            qPoint *= rotation;
+            return qPoint.eulerAngles;
         }
         public static Quarentenion operator *(Quarentenion a, Quarentenion b)
         {
@@ -552,15 +516,11 @@ namespace CustomMath
         }
         public static bool operator ==(Quarentenion lhs, Quarentenion rhs)
         {
-            if (lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z && lhs.w == rhs.w)
-                return true;
-            else
-                return false;
-            //throw new NotImplementedException();
+            return (lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z && lhs.w == rhs.w);
         }
         public static bool operator !=(Quarentenion lhs, Quarentenion rhs)
         {
-            throw new NotImplementedException();
+            return !(lhs == rhs);
         }
 
         public static implicit operator Quaternion(Quarentenion q)

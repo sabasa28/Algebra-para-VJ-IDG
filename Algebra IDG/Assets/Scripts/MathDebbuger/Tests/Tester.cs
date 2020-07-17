@@ -36,6 +36,9 @@ public class Tester : MonoBehaviour
         MatrixRecargada m = MatrixRecargada.identity;
         Matrix4x4 M = Matrix4x4.identity;
 
+        Debug.Log(Quaternion.AngleAxis(80, new Vector3(10, 20, 30)));
+        Debug.Log(Quarentenion.AngleAxis(80, new Vector3(10,20,30)));
+
         //m = MatrixRecargada.Translate(new Vec3(transform.position));
         //M = Matrix4x4.Translate((transform.position));
 
@@ -44,9 +47,6 @@ public class Tester : MonoBehaviour
         //
         //m = MatrixRecargada.Rotate(new Quarentenion(transform.rotation));
         //M = Matrix4x4.Rotate((transform.rotation));
-
-        Debug.Log(MatrixRecargada.TRS(new Vec3(transform.position),new Quarentenion(transform.rotation),new Vec3(transform.lossyScale)));
-        Debug.Log(M);
 
 
         //m= MatrixRecargada.Scale(new Vec3(transform.lossyScale));
