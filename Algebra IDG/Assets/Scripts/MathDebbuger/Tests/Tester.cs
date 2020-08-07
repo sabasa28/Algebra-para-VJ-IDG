@@ -7,6 +7,8 @@ using System;
 public class Tester : MonoBehaviour
 {
     public Quaternion rot;
+    public Quaternion rot1;
+
     void Start()
     {
         VectorDebugger.EnableCoordinates();
@@ -39,10 +41,71 @@ public class Tester : MonoBehaviour
         //Debug.Log(Quaternion.AngleAxis(80, new Vector3(10, 20, 30)));
         //Debug.Log(Quarentenion.AngleAxis(80, new Vector3(10,20,30)));
 
+        //rot = Quaternion.FromToRotation(Vector3.up,Vector3.right);
+        //miQ.SetFromToRotation(Vec3.Up,Vec3.Right);
+        //noMiQ.SetFromToRotation(Vector3.up,Vector3.right);
+        //Debug.Log(miQ);
+        //Debug.Log(noMiQ);
 
-        Debug.Log(Quarentenion.identity * Vec3.Up);
 
-        //m = MatrixRecargada.Translate(new Vec3(transform.position));
+        //dot//((a.x * b.x) + (a.y * b.y) + (a.z * b.z));
+
+        //Mathf.Rad2Deg * (float)Math.Acos(Dot(from, to) / (Math.Sqrt(Math.Pow(from.x, 2) + Math.Pow(from.y, 2) + Math.Pow(from.z, 2)) * Math.Sqrt(Math.Pow(to.x, 2) + Math.Pow(to.y, 2) + Math.Pow(to.z, 2))));
+
+
+
+
+
+
+        //Vector3 fromRot = transform.forward;
+        ////Debug.Log(fromRot);
+        //Vector3 toRot = Vector3.up;
+        ////Debug.Log(toRot);
+        //Vector3 betweeeeen;// = toRot - fromRot;
+        //float angle = Vector3.Angle(fromRot, toRot);
+        //float suma = Math.Abs(toRot.x) + Math.Abs(toRot.y) + Math.Abs(toRot.z);
+        //betweeeeen = toRot/suma;// * angle;
+        ////Debug.Log(betweeeeen);
+        //betweeeeen *=angle;
+        //rot1 =  Quaternion.Euler(fromRot)* Quaternion.Euler(betweeeeen);
+        //Debug.Log(toRot);
+        //Debug.Log(fromRot);
+        //Debug.Log(rotx);
+        //Debug.Log(roty);
+        //Debug.Log(rotz);
+        //Debug.Log("Vec target" + toRot);
+        //Debug.Log("Vec orig" + fromRot);
+        //Debug.Log("Angle " + angle);
+        //Debug.Log("Suma " + suma);
+        //Vector3 aux = new Vector3(toRot.x / suma, toRot.y / suma, toRot.z / suma);
+        //Debug.Log("Nornalizado" + aux);
+        ////aux = fromRot / suma; mah fasil
+        //Vector3 angleBetween = new Vector3(aux.x * angle, aux.y* angle, aux.z * angle);
+        //Debug.Log("Multiplicado por su angulo" + angleBetween);
+        ////angleBetween = aux * angle; mah fasil
+        //
+        ////angleBetween = new Vector3(fromRot.x + angleBetween.x, fromRot.y + angleBetween.y, fromRot.z + angleBetween.z);
+        //Debug.Log("Vector original sumado a el final" + angleBetween);
+        //rot1 = Quaternion.Euler (angleBetween);
+        //rot1 = Quaternion.Euler(spaceBetween);
+
+        //noMiQ2 = Vector3.Angle(Vector3.up, Vector3.right);
+
+        //noMiQ2 = Quaternion.Euler(Vector3.right);
+        //Debug.Log(noMiQ);
+        //Debug.Log(Quaternion.Euler(Vector3.up - Vector3.right));
+        //Debug.Log
+        //Debug.Log(Quaternion.Euler(Vector3.up));
+        //Debug.Log(Quaternion.Euler(Vector3.right));
+        //Debug.Log(Vector3.up);
+        //Debug.Log(Vector3.right);
+
+
+
+
+        //Debug.Log(Quarentenion.identity * Vec3.Up);
+
+        //m = MatrixRecargada.Translat}e(new Vec3(transform.position));
         //M = Matrix4x4.Translate((transform.position));
 
         //m = MatrixRecargada.Scale(new Vec3(transform.lossyScale));
@@ -256,12 +319,39 @@ public class Tester : MonoBehaviour
         Debug.Log(Vector3.Lerp(test3,test4,10));
         */
         #endregion
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        rot = transform.rotation;
+        //if (Input.GetKeyDown(KeyCode.W))
+        //{
+        //    transform.rotation = Quaternion.FromToRotation(transform.forward, Vector3.up);
+        //    Debug.Log("arriba");
+        //}
+        //if (Input.GetKeyDown(KeyCode.S))
+        //{
+        //    transform.rotation = rot1;
+        //    Debug.Log("abajo");
+        //}
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+        //    transform.rotation = rot;
+        //    Debug.Log("izquierda");
+        //}
+        //if (Input.GetKeyDown(KeyCode.D))
+        //{
+        //    transform.rotation = rot;
+        //    Debug.Log("derecha");
+        //}
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    transform.rotation = rot;
+        //    Debug.Log("hizo la wea ya");
+        //}
+
+        
         if (Input.GetKeyDown(KeyCode.O))
         {
             VectorDebugger.TurnOffVector("elAzul");

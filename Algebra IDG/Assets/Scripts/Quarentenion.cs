@@ -260,7 +260,14 @@ namespace CustomMath
         //   toDirection:
         public static Quarentenion FromToRotation(Vec3 fromDirection, Vec3 toDirection)
         {
-            throw new NotImplementedException();
+            Vec3 cross = Vec3.Cross(fromDirection, toDirection);
+            Quarentenion q;
+            q.x = cross.x;
+            q.y = cross.y;
+            q.z = cross.z;
+            q.w = fromDirection.magnitude * toDirection.magnitude + Vec3.Dot(fromDirection, toDirection);
+            q.Normalize();
+            return q;
         }
         //
         // Resumen:
@@ -318,7 +325,7 @@ namespace CustomMath
         //     The vector that defines in which direction up is.
         public static Quarentenion LookRotation(Vec3 forward)
         {
-            throw new NotImplementedException();
+            return LookRotation(forward, Vec3.Up);
         }
         //
         // Resumen:
@@ -456,7 +463,12 @@ namespace CustomMath
         //   toDirection:
         public void SetFromToRotation(Vec3 fromDirection, Vec3 toDirection)
         {
-            throw new NotImplementedException();
+            Quarentenion q = FromToRotation(fromDirection,toDirection);
+            x = q.x;
+            y = q.y;
+            z = q.z;
+            w = q.w;
+
         }
         //
         // Resumen:
@@ -470,7 +482,11 @@ namespace CustomMath
         //     The vector that defines in which direction up is.
         public void SetLookRotation(Vec3 view, [DefaultValue("Vector3.up")] Vec3 up)
         {
-            throw new NotImplementedException();
+            Quarentenion q = LookRotation(view, up);
+            x = q.x;
+            y = q.y;
+            z = q.z;
+            w = q.w;
         }
         //
         // Resumen:
@@ -484,7 +500,11 @@ namespace CustomMath
         //     The vector that defines in which direction up is.
         public void SetLookRotation(Vec3 view)
         {
-            throw new NotImplementedException();
+            Quarentenion q = LookRotation(view);
+            x = q.x;
+            y = q.y;
+            z = q.z;
+            w = q.w;
         }
         public void ToAngleAxis(out float angle, out Vec3 axis)
         {
